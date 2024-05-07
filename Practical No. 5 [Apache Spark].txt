@@ -1,0 +1,138 @@
+# PRACTICAL NO-5
+
+#SPARK BASICS
+
+1. Open the terminal in the apache sbin folder and type the following commands:
+
+spark-shell
+
+spark.version
+
+scala> print("Talib")
+
+#wordcount
+--> Save the file as wordcount.txt in the C:/drive apache bin folder
+
+val data=sc.textFile("wordcount.txt");
+
+data.collect;
+
+val splitdata = data.flatMap(line => line.split(""));
+
+splitdata.collect;
+
+val mapdata = splitdata.map(word => (word,1));
+
+mapdata.collect;
+
+val reducedata = mapdata.reduceByKey(_+_);
+
+reducedata.collect;
+
+
+# RDD shared variables
+val info = Array(1,2,3,4)
+val distinfo = sc.parallelize(info)
+val v = sc.broadcast(Array(1,2,3))
+v.value
+val a=sc.longAccumulator("Accumulator")
+sc.parallelize(Array(2,5)).foreach(x=>a.add(x))
+a.value
+
+
+#Map Function
+val data1 = sc.parallelize(List(10,20,30))
+data1.collect;
+val mapfunc = data1.map(x => x+10)
+mapfunc.collect
+
+
+#Filter Function
+val data2 = sc.parallelize(List(10,20,35,40))
+data2.collect;
+val filterfunc = data2.filter(x => x!=35)
+filterfunc.collect
+
+
+#Count Function
+val data = sc.parallelize(List(1,2,3,4,5))
+data.collect
+val countfunc = data.count()
+
+#Distinct function
+val data1 = sc.parallelize(List(10,20,20,40))
+data1.collect
+val distinctfunc = data1.distinct()
+distinctfunc.collect
+
+
+#Union function
+val unionfunc = data.union(data1)
+unionfunc.collect
+
+
+#Intersection tool
+val data2 = sc.parallelize(List(1,20,40))
+data2.collect
+val intersectfunc = data1.intersection(data2)
+intersectfunc.collect
+
+
+#Cartesian Function
+val cartesianfunc = data1.cartesian(data2)
+cartesianfunc.collect
+
+
+#sortby Key
+val data = sc.parallelize(seq(("C",3),("A",1),("D",4),("B",2),("E",5)))
+data.collect
+val sortfunc = data.sortByKey()
+sortfunc.collect
+
+
+#Spark group By Key Function
+val data = sc.parallelize(seq(("C",3),("A",1),("B",4),("A",2),("B",5)))
+data.collect
+val groupfunc = data.groupByKey()
+groupfunc.collect
+
+
+#spark reduce By Key Function
+val reducefunc = data.reduceByKey((value, x) => (value + x))
+reducefunc.collect
+
+
+#Spark Cogroup Function
+val data1 = sc.parallelize(seq(("A",1),("B",2),("C",3)))
+data1.collect
+val data2 = sc.parallelize(seq(("B",4),("E",5)))
+data2.collect
+val cogroupfunc = data1.cogroup(data2)
+cogroupfunc.collect
+
+
+#Spark First Function
+val data = sc.parallelize(List(10,20,30,40,50))
+data.collect
+val fisrtfunc = data.first()
+
+
+#Spark Take Function
+val data = sc.parallelize(List(10,20,30,40,50))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

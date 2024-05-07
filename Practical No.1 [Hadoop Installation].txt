@@ -1,0 +1,30 @@
+# PRACTICAL NO. 1
+
+
+# INSTALLING AND STARTING HADOOP
+
+
+1. Install Java [jdk]: java-version
+2. Check for Hadoop version: hadoop version
+
+3. Open cmd from Hadoop bin or in the cms type: 
+--> cd hadoop 3.3.0
+--> cd sbin
+ 
+4. Now write the following commands in the Terminal:-
+--> hdfs namenode -format
+--> start-all.cmd
+--> jps
+
+5. We have successfully started our Hadoop
+
+6. Start namenode and datanode with this command:-
+--> type start-dfs.cmd
+
+7. Start yarn through this command:-
+--> type start-yarn.cmd
+
+8. Open on browser:-
+http://localhost:8088
+http://localhost:9870
+

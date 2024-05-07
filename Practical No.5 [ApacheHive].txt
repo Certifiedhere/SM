@@ -1,0 +1,44 @@
+#PRACTICAL NO. 5
+
+# APACHE HIVE
+
+1. Starting Hive
+--> Start by starting with Hadoop in the cmd i.e. start-all.cmd
+--> Open the MySQL Workbench
+--> Open SQL Query File which is saved in the hive i.e hive.sql.3.3.1 [this is the sql query file name]
+--> Run the SQL Query File
+--> Open cmd Terminal and type the following commands:-
+ hive --service metastore
+ hive --service hiveserver2
+ hive
+**[If the commands are not working in the particular command prompt open a new command prompt at each step and type all the 3 commands in different-different cmd prompt shell]**
+
+Now you should get a hive> shell run the following codes on the shell for Hive Commands:
+1. Commands
+show databases;
+create database demo;
+show databases;
+describe database extend demo;
+
+2. Drop Databases:
+show databases;
+drop databases;
+show databases;
+
+3. Drop Table:
+show databases;
+use demo;
+show tables;
+drop table new_employee;
+show tables;
+
+4. Alter Table:
+Alter table emp RENAME TO employee_data;
+
+5. Describe:
+describe employee_data;
+select* from employee_data;
+Alter table employee_data add columns (age,int);
+describe employee_data;
+
+

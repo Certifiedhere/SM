@@ -1,0 +1,127 @@
+#PRACTICAL NO.3
+
+APACHA PIG
+
+1. Open Hadoop as shown in Practical 1
+
+2. Run cmd as Administrator 
+
+3. Type Commands in the cmd open 
+pig -version
+pig -x local
+
+--> If Error comes i.e. log files error
+pig -x local 4 nolog.conf
+
+**Whatever data you put in the .txt files please provide the file content as Tuple format i.e. (1,2,3)***
+
+# Load and Dump
+--> Make txt file names as Data in the Pig folder i.e. pig 0.17.0
+--> Go in the Run as Administrator Shell and type the following
+A = load 'data.txt' as (lines);
+dump A;
+
+# Describe
+describe A;
+
+# Cross Product
+--> Make 2 (.txt files) named pcross1 and pcross2 in the pig 0.17.0 folder and extract the filed from there in [RAADM]
+C1 = load 'pcross1.txt' using PigStorage(',') as (a1:int,a2:int);
+C2 = load 'pcross2.txt' using PigStorage(',') as (a1:int,a2:int,a3:int);
+result = cross C1,C2
+dump result;
+
+# Store
+store result into 'PigFolder';
+
+# Filter
+--> Make .txt file names as filter in the Pig folder i.e. pig 0.17.0
+b = load 'filter.txt' using PigStorage(',') as (a1:int,a2:int);
+dump b;
+result = filter b by a2==8;
+dump result;
+
+# ForEach 
+--> Make .txt file names as foreach in the Pig folder i.e. pig 0.17.0
+a = load 'foreach.txt' using PigStorage(',') as (a1:int,a2:int,a3:int)
+dump a;
+fe = foreach a generate a1,a2;
+dump fe;
+
+# Group
+--> Make .txt file names as group in the Pig folder i.e. pig 0.17.0
+B = load 'group.txt' using PigStorage(',') as (fname:chararray,lname:chararray,id:int);
+dump B;
+groupFname = group A by fname;
+dump groupFname;
+
+# Limit
+--> Make .txt file names as limit in the Pig folder i.e. pig 0.17.0
+l = load 'limit.txt' using PigStorage(',') as (a1:int,a2:int,a3:int);
+dump l;
+resultl = limit 1 2;
+dump resultl;
+
+# OrderBy
+--> Make .txt file names as order in the Pig folder i.e. pig 0.17.0
+o = load 'order.txt' using PigStorage(',') as (a1:int,a2:int,a3:int);
+dump o;
+resulto = order o by a 1 desc;
+Dump result;
+
+# Split
+--> Make .txt file names as split in the Pig folder i.e. pig 0.17.0
+s = load 'order.txt' using PigStorage(',') as (a1:int,a2:int);
+dump s;
+split s into x if a1<=2, y if a1>2;
+dump x;
+
+# Distinct
+--> Make .txt file names as order in the Pig folder i.e. pig 0.17.0
+d = load 'distinct.txt' using PigStorage(',') as (a1:int,a2:int,a3:int);
+dump d;
+result distinct d;
+dump result;
+
+#Joins
+1. Self Joins:
+--> Make 2 .txt file names as customers.txt and orders.txt in the Pig folder i.e. pig 0.17.0
+a = load 'customers.txt' using PigStorage(',') as (id:int,name:chararray,age:int,address:chararray,salary:int);
+
+b = load 'customers.txt' using PigStorage(',') as (id:int,name:chararray,age:int,address:chararray,salary:int);
+result = join a by id, by by id;
+dump result;
+
+2. Inner Joins:
+--> Make 2 .txt file names as customers.txt and orders.txt in the Pig folder i.e. pig 0.17.0
+a = load 'customers.txt' using PigStorage(',') as (id:int,name:chararray,age:int,address:chararray,salary:int);
+
+b = load 'orders.txt' using PigStorage(',') as (id:int,date:chararray,customer_id:int,amount:int);
+
+c = join a by id, b by customer_id;
+dump c;
+
+3. Outer Joins:
+--> Make 2 .txt file names as customers.txt and orders.txt in the Pig folder i.e. pig 0.17.0
+d = join a by id LEFT OUTER, b by customer_id;
+dump d;
+
+e = join a by id RIGHT, b by customer_id;
+dump e;
+
+f = join a by id FULL OUTER, b by customer_id;
+dump f;
+
+
+
+
+
+4. Working with .csv file
+ --> Create .csv file named sales.csv the file should contain sales records 
+
+#Load
+sales = load 'sales.csv' using PigStorage(',') as (date:chararray,product:chararray,price:chararray,type:chararray,city:chararray);
+dump sales;
+groupByCity = group sales by city;
+dump groupByCity;
+

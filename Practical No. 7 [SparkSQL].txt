@@ -1,0 +1,48 @@
+#PRACTICAL NO. 7
+
+#SPARKSQL
+
+
+1. .JSON FORMAT FILE
+
+# Reading the json document and show the data
+val dfs = sqlcontext.read.json("employees.json")
+dfs.show()
+
+# Print Schema method
+dfs.printSchema()
+
+#Select method [Show the name column from the table]
+dfs.select("name").show()
+
+#Filter [Finding Employees who's age is greater than 23]
+dfs.filter(dfs("age")>23.show()
+
+#Groupby Method
+ dfs.groupBy("age").count().show()
+
+
+
+2. SQL QUERIES
+
+# Create sql Context and import sql functions
+ val sqlcontext = new org.apache.spark.sql.SQLContext(sc)
+
+# Creating schema of employee data using case class
+ case class Employee(id:Int,name:String,age:Int)
+
+# Create rdd and apply transformations
+ val empl=sctestFile("employee.txt").map(_.split(",")).map(e=>Employee(e(0).trim.toInt,e(1),e(2).trim.toInt)).toDF()
+  
+# Store the dataframe in a table
+empl.registerTempTable("employee")
+
+#Select query on dataframe
+val records=sqlContext.sql("SELECT * FROM employee")
+
+# Using where clause Age between 20 and 35
+val agefilter = sqlContext.sql("SELECT* FROM employee WHERE age>=20 AND age <= 35")
+agefilter.show()
+
+#Fetch ID values from agefilter DataFrame using column index
+agefilter.map(t =>"ID: "+t(0)).collect().foreach(println)

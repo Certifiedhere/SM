@@ -1,0 +1,59 @@
+#PRACTICAL NO.4
+
+APACHE Hbase
+
+# Type Commands:
+hbase.cmd
+
+1. Schema Commands
+
+whoami: To return the Hbase current information.
+
+Create: To create table.
+* create 'cs','students'
+
+
+List: To display all the tables that are present or created in the Hbase.
+* list
+
+Describe: It will give information and detail about column families present in the hbase.
+* describe 'cs'
+
+Disable: This command will start disabling the table name.
+* disable 'cs'
+
+Enable: To enable the following table
+* enable 'cs'
+
+show_filters: To display all the filters present in Hbasei.e. Column prefix, Timestamps, Filter, etc.
+* show_filters
+
+Drop: To delete the table present in Hbase first we disable it then we drop it.
+* disable 'cs'
+* drop 'cs'
+
+Alter: This command alters to tables 
+* alter 'cs'. {NAME => 'students')
+
+
+
+2. Data Manipulation Commands
+Count: To retrieve the count of number of rows in a table.
+* count 'cs'
+
+Put: It will put a cell value at defined or specified table row or column.
+* put 'cs',1,'students:name','Talib'
+
+Get: To get the row or cell content present in the table.
+* get 'cs','1', 'students'
+
+Delete: To delete all cells in a given row.
+* delete 'cs','1','students:roll'
+
+Truncate: Disable table if it is already present and drops it.
+* truncate 'cs'
+
+Scan: This command scans entire table and displays the table contents.
+* scan 'cs'
+
+

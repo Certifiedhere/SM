@@ -1,0 +1,44 @@
+# PRACTICAL NO-5
+
+#PYSPARK
+
+1. To open pyspark shell simply on command line write pyspark and it will open
+
+2. In the spark folder in C:/drive there is a README.md file we have to load the particular file in the cmd terminal of spark
+
+3. Run the following commands in the spark shell
+
+>>> input = spark.read.txt("README.md")
+input.count()
+
+input.first()
+
+lines = input.filter(input.value.contains("Sparks"))
+
+input.filter(input.value.contains("Spark")).count()
+
+from pyspark.sql.functions import*
+
+input.select(size(split(input.value,"\s+")).name("numWords")).agg(max(col("numWords"))).collect()
+
+wordCount = input.select(explode(split(input.value,"\s+")).alias("word")).groupBy("word").count()
+
+wordcount.collect()
+
+
+
+4. Spark Applications
+--> Create an app.py file in [C:/drive apache folder] 
+
+Code:
+from pyspark.sql import SparkSession
+logFile = "README.md"
+spark = SparkSession.builder.appName("SimpleApp").getOrCreate()
+logData = spark.read.text(logFile).cache()
+numAs = logData.filter(logData.value.contains('a')).count()
+numBs = logData.filter(logData.value.contains('b')).count()
+print("Lines with a: %i, lines with b: %i" % (numAs,numBs))
+spark.stop()
+
+--> Now in the [C:/drive apache folder]  open the cmd terminal and type the following:
+python app.py
